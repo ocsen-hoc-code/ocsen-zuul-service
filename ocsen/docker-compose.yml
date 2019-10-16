@@ -1,0 +1,28 @@
+version: '3.5'
+
+services:
+
+  ocsen-zuul-server:
+    container_name: ocsen_zuul_service_container
+    image: ocsen-zuul-service:latest
+    ports:
+      - 8080:8080
+      # If you want use devtools
+      # - 8000:8000
+    volumes:
+      - .:/app
+    networks:
+      ocsen_microservice:
+        ipv4_address: 172.88.1.2
+
+# networks:
+#   default:
+#     external:
+#       name: ocsen-microservice
+
+networks:
+    ocsen_microservice:
+        ipam:
+            driver: default
+            config:
+                - subnet: 172.88.0.0/16
